@@ -226,6 +226,11 @@ class AdamLearningRule(GradientDescentLearningRule):
         For this learning rule this corresponds to zeroing the estimates of
         the first and second moments of the gradients.
         """
+        for mom_1 in self.moms_1:
+            mom_1 *= 0.
+        for mom_2 in self.moms_2:
+            mom_2 *= 0
+        self.step_count = 0
         raise NotImplementedError
 
     def update_params(self, grads_wrt_params):
@@ -237,6 +242,12 @@ class AdamLearningRule(GradientDescentLearningRule):
                 with respect to each of the parameters passed to `initialise`
                 previously, with this list expected to be in the same order.
         """
+        for mom_1, mom_2, grad in zip(self.moms_1, self.moms_2, grads_wrt_params):
+            # grad = gradients w.r.t. stochastic objective
+            mom_1 *= self.beta_1
+            mom_1 += (1 - self.beta_1) * grad
+            mom_2 *= self.beta_2
+            mom_2 += (1 - self.beta_2) * grad * grad
         raise NotImplementedError
 
 class AdamLearningRuleWithWeightDecay(GradientDescentLearningRule):
