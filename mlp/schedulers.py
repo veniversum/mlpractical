@@ -53,6 +53,7 @@ class CosineAnnealingWithWarmRestarts(object):
         self.max_learning_rate_discount_factor = max_learning_rate_discount_factor
         self.period_iteration_expansion_factor = period_iteration_expansion_factor
 
+        self.last_restart = 0
 
     def update_learning_rule(self, learning_rule, epoch_number):
         """Update the hyperparameters of the learning rule.
@@ -67,7 +68,17 @@ class CosineAnnealingWithWarmRestarts(object):
         Returns:
             effective_learning_rate at step 'epoch_number'
         """
-        raise NotImplementedError
+        i = epoch_number - self.last_restart
+        if i >= self.total_epochs_per_period:
+            # Maybe start from middle
+            while i >= self.total_epochs_per_period:
+                i -= self.total_epochs_per_period
+                self.last_restart += self.total_epochs_per_period
+                self.total_epochs_per_period *= self.period_iteration_expansion_factor
+                self.max_learning_rate *= self.max_learning_rate_discount_factor
 
+        learning_rate = self.min_learning_rate + 0.5 * (self.max_learning_rate - self.min_learning_rate) * (1. + np.cos(i / self.total_epochs_per_period * np.pi))
+        learning_rule.learning_rate = learning_rate
 
+        return learning_rate
 

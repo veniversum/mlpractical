@@ -1,21 +1,104 @@
-\begin{thebibliography}{2}
+\begin{thebibliography}{14}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Langley(2000)]{langley00}
-Langley, P.
-\newblock Crafting papers on machine learning.
-\newblock In Langley, Pat (ed.), \emph{Proceedings of the 17th International
-  Conference on Machine Learning (ICML 2000)}, pp.\  1207--1216, Stanford, CA,
-  2000. Morgan Kaufmann.
+\bibitem[Aitchison(2018)]{aitchison2018unified}
+Aitchison, Laurence.
+\newblock A unified theory of adaptive stochastic gradient descent as bayesian
+  filtering.
+\newblock \emph{arXiv preprint arXiv:1807.07540}, 2018.
+
+\bibitem[Anonymous(2019)]{anonymous2019decoupled}
+Anonymous.
+\newblock Decoupled weight decay regularization.
+\newblock In \emph{Submitted to International Conference on Learning
+  Representations}, 2019.
+\newblock URL \url{https://openreview.net/forum?id=Bkg6RiCqY7}.
+\newblock under review.
+
+\bibitem[Bengio(2012)]{bengio2012practical}
+Bengio, Yoshua.
+\newblock Practical recommendations for gradient-based training of deep
+  architectures.
+\newblock In \emph{Neural networks: Tricks of the trade}, pp.\  437--478.
+  Springer, 2012.
+
+\bibitem[Bottou et~al.(1994)Bottou, Cortes, Denker, Drucker, Guyon, Jackel,
+  LeCun, Muller, Sackinger, Simard, et~al.]{bottou1994comparison}
+Bottou, L{\'e}on, Cortes, Corinna, Denker, John~S, Drucker, Harris, Guyon,
+  Isabelle, Jackel, Lawrence~D, LeCun, Yann, Muller, Urs~A, Sackinger, Edward,
+  Simard, Patrice, et~al.
+\newblock Comparison of classifier methods: a case study in handwritten digit
+  recognition.
+\newblock In \emph{Pattern Recognition, 1994. Vol. 2-Conference B: Computer
+  Vision \& Image Processing., Proceedings of the 12th IAPR International.
+  Conference on}, volume~2, pp.\  77--82. IEEE, 1994.
+
+\bibitem[Cohen et~al.(2017)Cohen, Afshar, Tapson, and van
+  Schaik]{cohen2017emnist}
+Cohen, Gregory, Afshar, Saeed, Tapson, Jonathan, and van Schaik, Andr{\'e}.
+\newblock Emnist: an extension of mnist to handwritten letters.
+\newblock \emph{arXiv preprint arXiv:1702.05373}, 2017.
+
+\bibitem[Duchi et~al.(2011)Duchi, Hazan, and Singer]{duchi2011adaptive}
+Duchi, John, Hazan, Elad, and Singer, Yoram.
+\newblock Adaptive subgradient methods for online learning and stochastic
+  optimization.
+\newblock \emph{Journal of Machine Learning Research}, 12\penalty0
+  (Jul):\penalty0 2121--2159, 2011.
+
+\bibitem[Feurer et~al.(2015)Feurer, Klein, Eggensperger, Springenberg, Blum,
+  and Hutter]{feurer2015efficient}
+Feurer, Matthias, Klein, Aaron, Eggensperger, Katharina, Springenberg, Jost,
+  Blum, Manuel, and Hutter, Frank.
+\newblock Efficient and robust automated machine learning.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pp.\
+  2962--2970, 2015.
+
+\bibitem[Gonz{\'a}lez \& Abu-Mostafa(2014)Gonz{\'a}lez and
+  Abu-Mostafa]{gonzalez2014four}
+Gonz{\'a}lez, Carlos~R and Abu-Mostafa, Yaser~S.
+\newblock Four results in matching data distributions.
+\newblock \emph{Jun}, 21:\penalty0 1--18, 2014.
+
+\bibitem[Goodfellow et~al.(2016)Goodfellow, Bengio, and
+  Courville]{Goodfellow-et-al-2016}
+Goodfellow, Ian, Bengio, Yoshua, and Courville, Aaron.
+\newblock \emph{Deep Learning}.
+\newblock MIT Press, 2016.
+\newblock \url{http://www.deeplearningbook.org}.
+
+\bibitem[Kingma \& Ba(2014)Kingma and Ba]{kingma2014adam}
+Kingma, Diederik~P and Ba, Jimmy.
+\newblock Adam: A method for stochastic optimization.
+\newblock \emph{arXiv preprint arXiv:1412.6980}, 2014.
+
+\bibitem[Loshchilov \& Hutter(2016)Loshchilov and Hutter]{loshchilov2016sgdr}
+Loshchilov, Ilya and Hutter, Frank.
+\newblock Sgdr: Stochastic gradient descent with warm restarts.
+\newblock \emph{arXiv preprint arXiv:1608.03983}, 2016.
 
 \bibitem[Loshchilov \& Hutter(2017)Loshchilov and Hutter]{loshchilov2018fixing}
 Loshchilov, Ilya and Hutter, Frank.
 \newblock Fixing weight decay regularization in {Adam}.
 \newblock \emph{arXiv preprint arXiv:1711.05101}, 2017.
 \newblock URL \url{https://arxiv.org/abs/1711.05101}.
+
+\bibitem[Storkey(2009)]{storkey2009training}
+Storkey, Amos.
+\newblock When training and test sets are different: characterizing learning
+  transfer.
+\newblock \emph{Dataset shift in machine learning}, pp.\  3--28, 2009.
+
+\bibitem[Wilson et~al.(2017)Wilson, Roelofs, Stern, Srebro, and
+  Recht]{wilson2017marginal}
+Wilson, Ashia~C, Roelofs, Rebecca, Stern, Mitchell, Srebro, Nati, and Recht,
+  Benjamin.
+\newblock The marginal value of adaptive gradient methods in machine learning.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pp.\
+  4148--4158, 2017.
 
 \end{thebibliography}

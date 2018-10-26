@@ -231,7 +231,6 @@ class AdamLearningRule(GradientDescentLearningRule):
         for mom_2 in self.moms_2:
             mom_2 *= 0
         self.step_count = 0
-        raise NotImplementedError
 
     def update_params(self, grads_wrt_params):
         """Applies a single update to all parameters.
@@ -242,13 +241,16 @@ class AdamLearningRule(GradientDescentLearningRule):
                 with respect to each of the parameters passed to `initialise`
                 previously, with this list expected to be in the same order.
         """
-        for mom_1, mom_2, grad in zip(self.moms_1, self.moms_2, grads_wrt_params):
+        for param, mom_1, mom_2, grad in zip(self.params, self.moms_1, self.moms_2, grads_wrt_params):
             # grad = gradients w.r.t. stochastic objective
+            self.step_count += 1
             mom_1 *= self.beta_1
             mom_1 += (1 - self.beta_1) * grad
             mom_2 *= self.beta_2
-            mom_2 += (1 - self.beta_2) * grad * grad
-        raise NotImplementedError
+            mom_2 += (1 - self.beta_2) * np.square(grad)
+            mom_1_hat = mom_1 / (1 - np.power(self.beta_1, self.step_count))
+            mom_2_hat = mom_2 / (1 - np.power(self.beta_2, self.step_count))
+            param -= self.learning_rate * mom_1_hat / (np.sqrt(mom_2_hat) + self.epsilon)
 
 class AdamLearningRuleWithWeightDecay(GradientDescentLearningRule):
     """Adaptive moments (Adam) learning rule with Weight Decay.
@@ -317,7 +319,11 @@ class AdamLearningRuleWithWeightDecay(GradientDescentLearningRule):
         For this learning rule this corresponds to zeroing the estimates of
         the first and second moments of the gradients.
         """
-        raise NotImplementedError
+        for mom_1 in self.moms_1:
+            mom_1 *= 0.
+        for mom_2 in self.moms_2:
+            mom_2 *= 0
+        self.step_count = 0
 
     def update_params(self, grads_wrt_params):
         """Applies a single update to all parameters.
@@ -331,9 +337,17 @@ class AdamLearningRuleWithWeightDecay(GradientDescentLearningRule):
         # tip:
         # ηt * initial_learning_rate = learning_rate
         # ηt = learning_rate / initial_learning_rate
-
-
-        raise NotImplementedError
+        for param, mom_1, mom_2, grad in zip(self.params, self.moms_1, self.moms_2, grads_wrt_params):
+            # grad = gradients w.r.t. stochastic objective
+            self.step_count += 1
+            mom_1 *= self.beta_1
+            mom_1 += (1 - self.beta_1) * grad
+            mom_2 *= self.beta_2
+            mom_2 += (1 - self.beta_2) * np.square(grad)
+            mom_1_hat = mom_1 / (1 - np.power(self.beta_1, self.step_count))
+            mom_2_hat = mom_2 / (1 - np.power(self.beta_2, self.step_count))
+            eta = self.learning_rate / self.initial_learning_rate
+            param -= eta * (self.initial_learning_rate * mom_1_hat / (np.sqrt(mom_2_hat) + self.epsilon) + self.weight_decay * param)
 
 
 class AdaGradLearningRule(GradientDescentLearningRule):
@@ -440,15 +454,15 @@ class RMSPropLearningRule(GradientDescentLearningRule):
                 update.
         """
         super(RMSPropLearningRule, self).initialise(params)
-
-        raise NotImplementedError
+        self.accumulators = [np.zeros_like(p) for p in params]
 
     def reset(self):
         """Resets any additional state variables to their initial values.
         For this learning rule this corresponds to zeroing all gradient
         second moment estimates.
         """
-        raise NotImplementedError
+        for a in self.accumulators:
+            a *= 0.
 
     def update_params(self, grads_wrt_params):
         """Applies a single update to all parameters.
@@ -459,4 +473,7 @@ class RMSPropLearningRule(GradientDescentLearningRule):
                 with respect to each of the parameters passed to `initialise`
                 previously, with this list expected to be in the same order.
         """
-        raise NotImplementedError
+        for p, g, a in zip(self.params, grads_wrt_params, self.accumulators):
+            a *= self.beta
+            a += (1. - self.beta) * np.square(g)
+            p -= self.learning_rate * g / (np.sqrt(a) + self.epsilon)

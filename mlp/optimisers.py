@@ -49,7 +49,7 @@ class Optimiser(object):
         else:
             self.tqdm_progress = tqdm.tqdm
 
-    def do_training_epoch(self):
+    def do_training_epoch(self, *args):
         """Do a single training epoch.
 
         This iterates through all batches in training dataset, for each
@@ -57,15 +57,15 @@ class Optimiser(object):
         respect to all the model parameters and then updates the model
         parameters according to the learning rule.
         """
-        with self.tqdm_progress(total=self.train_dataset.num_batches) as train_progress_bar:
-            train_progress_bar.set_description("Ep Prog")
-            for inputs_batch, targets_batch in self.train_dataset:
-                activations = self.model.fprop(inputs_batch)
-                grads_wrt_outputs = self.error.grad(activations[-1], targets_batch)
-                grads_wrt_params = self.model.grads_wrt_params(
-                    activations, grads_wrt_outputs)
-                self.learning_rule.update_params(grads_wrt_params)
-                train_progress_bar.update(1)
+        # with self.tqdm_progress(total=self.train_dataset.num_batches) as train_progress_bar:
+        #     train_progress_bar.set_description("Ep Prog")
+        for inputs_batch, targets_batch in self.train_dataset:
+            activations = self.model.fprop(inputs_batch)
+            grads_wrt_outputs = self.error.grad(activations[-1], targets_batch)
+            grads_wrt_params = self.model.grads_wrt_params(
+                activations, grads_wrt_outputs)
+            self.learning_rule.update_params(grads_wrt_params)
+            # train_progress_bar.update(1)
 
     def eval_monitors(self, dataset, label):
         """Evaluates the monitors for the given dataset.
@@ -115,7 +115,7 @@ class Optimiser(object):
             ', '.join(['{0}={1:.2e}'.format(k, v) for (k, v) in stats.items()])
         ))
 
-    def train(self, num_epochs, stats_interval=5):
+    def train(self, num_epochs, stats_interval=5, early_stopping=False):
         """Trains a model for a set number of epochs.
 
         Args:
@@ -133,16 +133,50 @@ class Optimiser(object):
         run_stats = [list(self.get_epoch_stats().values())]
         with self.tqdm_progress(total=num_epochs) as progress_bar:
             progress_bar.set_description("Exp Prog")
+            min_loss = 99999
+            went_up = 0
             for epoch in range(1, num_epochs + 1):
                 start_time = time.time()
-                self.do_training_epoch()
+                self.do_training_epoch(epoch)
                 epoch_time = time.time()- start_time
                 if epoch % stats_interval == 0:
                     stats = self.get_epoch_stats()
                     self.log_stats(epoch, epoch_time, stats)
+                    if early_stopping:
+                        if min_loss < stats['error(valid)']:
+                            went_up += 1
+                        else:
+                            min_loss = stats['error(valid)']
+                            went_up = 0
+                        if went_up > 3:
+                            # Valid error increased 3 times in a row
+                            print('EARLY STOPPING!')
+                            break
                     run_stats.append(list(stats.values()))
                 progress_bar.update(1)
         finish_train_time = time.time()
         total_train_time = finish_train_time - start_train_time
         return np.array(run_stats), {k: i for i, k in enumerate(stats.keys())}, total_train_time
 
+class ScheduledOptimiser(Optimiser):
+    def __init__(self, scheduler, *args, **kwargs):
+        super(ScheduledOptimiser, self).__init__(*args, **kwargs)
+        self.scheduler = scheduler
+
+    def do_training_epoch(self, epoch):
+        """Do a single training epoch.
+
+        This iterates through all batches in training dataset, for each
+        calculating the gradient of the estimated error given the batch with
+        respect to all the model parameters and then updates the model
+        parameters according to the learning rule.
+        """
+        # with self.tqdm_progress(total=self.train_dataset.num_batches) as train_progress_bar:
+        #     train_progress_bar.set_description("Ep Prog")
+        self.scheduler.update_learning_rule(self.learning_rule, epoch)
+        for inputs_batch, targets_batch in self.train_dataset:
+            activations = self.model.fprop(inputs_batch)
+            grads_wrt_outputs = self.error.grad(activations[-1], targets_batch)
+            grads_wrt_params = self.model.grads_wrt_params(
+                activations, grads_wrt_outputs)
+            self.learning_rule.update_params(grads_wrt_params)
