@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32e53e01-0f05-4e28-84c2-e2c76d31c361" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mlp/im2col.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mlp/layers.py" beforeDir="false" afterPath="$PROJECT_DIR$/mlp/layers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ConvolutionalLayer_tests.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ConvolutionalLayer_tests.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/MaxPoolingLayer_tests.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/MaxPoolingLayer_tests.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/mlp_cw2_template.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/report/mlp_cw2_template.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/mlp_cw2_template.tex" beforeDir="false" afterPath="$PROJECT_DIR$/report/mlp_cw2_template.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mlp/pytorch_experiment_scripts/model_architectures.py" beforeDir="false" afterPath="$PROJECT_DIR$/mlp/pytorch_experiment_scripts/model_architectures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mlp/pytorch_experiment_scripts/train_evaluate_emnist_classification_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/mlp/pytorch_experiment_scripts/train_evaluate_emnist_classification_system.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,22 +22,22 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="8" />
+          <entry key="py" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="8" />
+          <entry key="Python" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="604" />
+          <entry key="py" value="682" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="604" />
+          <entry key="Python" value="682" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -97,7 +93,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mlp/pytorch_experiment_scripts/train_evaluate_emnist_classification_system.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="425">
+              <caret line="25" column="65" lean-forward="true" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -106,10 +103,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mlp/pytorch_experiment_scripts/arg_extractor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="26" column="85" selection-start-line="26" selection-start-column="78" selection-end-line="26" selection-end-column="85" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mlp/pytorch_experiment_scripts/model_architectures.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-900">
-              <caret line="17" column="75" selection-start-line="17" selection-start-column="75" selection-end-line="17" selection-end-column="75" />
+            <state relative-caret-position="699">
+              <caret line="179" column="60" selection-start-line="179" selection-start-column="60" selection-end-line="179" selection-end-column="60" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -132,12 +138,16 @@
     <findStrings>
       <find>self.kernels</find>
       <find>output_height</find>
-      <find>stride</find>
       <find>do_cross_correlation</find>
       <find>grads_wrt_params</find>
       <find>cache</find>
       <find>penal</find>
       <find>/</find>
+      <find>stride</find>
+      <find>stride=</find>
+      <find>shape</find>
+      <find>model</find>
+      <find>strided</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -149,6 +159,8 @@
         <option value="$PROJECT_DIR$/mlp/im2col.py" />
         <option value="$PROJECT_DIR$/scripts/generate_max_pool_layer_test_file.py" />
         <option value="$PROJECT_DIR$/mlp/layers.py" />
+        <option value="$PROJECT_DIR$/mlp/pytorch_experiment_scripts/model_architectures.py" />
+        <option value="$PROJECT_DIR$/mlp/pytorch_experiment_scripts/train_evaluate_emnist_classification_system.py" />
       </list>
     </option>
   </component>
@@ -330,16 +342,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mlp/pytorch_experiment_scripts/model_architectures.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-900">
-          <caret line="17" column="75" selection-start-line="17" selection-start-column="75" selection-end-line="17" selection-end-column="75" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mlp/pytorch_experiment_scripts/experiment_builder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -347,9 +349,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mlp/pytorch_experiment_scripts/model_architectures.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="699">
+          <caret line="179" column="60" selection-start-line="179" selection-start-column="60" selection-end-line="179" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mlp/pytorch_experiment_scripts/arg_extractor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="26" column="85" selection-start-line="26" selection-start-column="78" selection-end-line="26" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mlp/pytorch_experiment_scripts/train_evaluate_emnist_classification_system.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="425">
+          <caret line="25" column="65" lean-forward="true" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>

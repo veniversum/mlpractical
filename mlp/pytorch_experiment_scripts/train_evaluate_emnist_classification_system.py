@@ -21,6 +21,10 @@ custom_conv_net = ConvolutionalNetwork(  # initialize our network object, in thi
     dim_reduction_type=args.dim_reduction_type,
     num_output_classes=train_data.num_classes, num_filters=args.num_filters, num_layers=args.num_layers, use_bias=False)
 
+pytorch_total_params = sum(p.numel() for p in custom_conv_net.parameters() if p.requires_grad)
+
+print("Trainable parameters in model: %d" % pytorch_total_params)
+
 conv_experiment = ExperimentBuilder(network_model=custom_conv_net,
                                     experiment_name=args.experiment_name,
                                     num_epochs=args.num_epochs,

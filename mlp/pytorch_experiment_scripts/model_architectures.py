@@ -127,7 +127,18 @@ class ConvolutionalNetwork(nn.Module):
             out = self.layer_dict['conv_{}'.format(i)](out)  # use layer on inputs to get an output
             out = F.relu(out)  # apply relu
             print(out.shape)
-            if self.dim_reduction_type == 'strided_convolution':  # if dim reduction is strided conv, then add a strided conv
+            if self.dim_reduction_type == 'baseline':  # if dim reduction is strided conv, then add a strided conv
+                self.layer_dict['dim_reduction_none_{}'.format(i)] = nn.Conv2d(in_channels=out.shape[1],
+                                                                                       kernel_size=3,
+                                                                                       out_channels=out.shape[1],
+                                                                                       padding=0,
+                                                                                       bias=self.use_bias, stride=1,
+                                                                                       dilation=1)
+
+                out = self.layer_dict['dim_reduction_none_{}'.format(i)](
+                    out)  # use strided conv to get an output
+                out = F.relu(out)  # apply relu to the output
+            elif self.dim_reduction_type == 'strided_convolution':  # if dim reduction is strided conv, then add a strided conv
                 self.layer_dict['dim_reduction_strided_conv_{}'.format(i)] = nn.Conv2d(in_channels=out.shape[1],
                                                                                        kernel_size=3,
                                                                                        out_channels=out.shape[1],
